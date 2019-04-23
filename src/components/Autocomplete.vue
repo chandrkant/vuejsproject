@@ -29,7 +29,7 @@
   export default {
     props: {
       items: {
-        default: [],
+        default: function () { return [] },
         type: Array
       },
       filterby: {
@@ -44,7 +44,7 @@
         default: true
       },
       inputId: {
-      	type: String
+        type: String
       }
     },
     data() {

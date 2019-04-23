@@ -50,7 +50,7 @@ export default {
     Datepicker:  Datepicker
   },
   mounted() {
-  	var self = this;
+    var self = this;
     axios.get(`https://test.railyatri.in/redbus/get-smart-bus-routes.json`).then(function (response){
     var list = []
 		self.cityList = response.data.smart_bus_routes
@@ -58,24 +58,26 @@ export default {
     list = list.map(city=>({name: city.source_city, code: city.source_city_id}))
     self.source = list
     self.dest = list
-  	}).catch(function (error) {
+    }).catch(function (error) {
     // handle error
-    	console.log(error);
-  	})
+      console.log(error);
+    });
   },
   methods: {
-  	onChange(){
+    onChange(){
 
-  	},
+    },
     getTrips(){
       this.$router.push({ name: 'result', params: { from: this.$children[0].$data.code.replace(' ', '-'),to: this.$children[1].$data.code.replace(' ', '-')},query: {from_code: this.formCode,to_code: this.toCode,doj: this.doj} })  
     },
-  	fromCitySelected(city) {
+    fromCitySelected(city) {
       var templist = []
       var self = this;
       self.formCode = city.code;
       console.log(`City Selected:\nid: ${city.code}\nname: ${city.name}`);
       templist = self.cityList.filter((obj, pos, arr) => {
+          console.log('pos: ', pos);
+          console.log('arr: ', arr);
           return obj.source_city_id=== city.code
       });
       self.dest = templist.map(city=>({name: city.destination_city, code: city.destination_city_id}))
@@ -96,7 +98,7 @@ export default {
 </script>
 <style type="text/css" media="screen">	
  .col-mid {
- 	  width: 45%;
+    width: 45%;
     margin: auto;
     position: relative;
     float: left;
